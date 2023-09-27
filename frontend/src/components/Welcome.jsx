@@ -1,5 +1,5 @@
-const Navbar = () => {
-  return <h1>Footer</h1>;
+const Welcome = () => {
+  return <h1>welcome</h1>;
 };
 
-export default Footer;
+export default Welcome;
