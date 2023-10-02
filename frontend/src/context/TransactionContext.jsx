@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import { ethers } from "ehters";
 
 import { contractABI, contractAddress } from "../utils/constants";
@@ -23,4 +23,20 @@ const getEthereumContract = () => {
   });
 };
 
-export const TransactionContext = ()
+export const TransactionProvider = ({ Children }) => {
+  const checkIfWalletIsConnected = async () => {
+    if (!ethereum) return alert("please install metamask");
+    const accounts = await ethereum.request({ method: "eth_accounts" });
+    console.log(accounts);
+  };
+
+  useEffect(() => {
+    checkIfWalletIsConnected();
+  }, []);
+
+  return (
+    <TransactionContext.provider value={{ value: "test" }}>
+      {Children}
+    </TransactionContext.provider>
+  );
+};
