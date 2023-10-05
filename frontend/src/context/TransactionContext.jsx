@@ -8,7 +8,7 @@ export const TransactionContext = React.createContext();
 const { ethereum } = window;
 
 const createEthereumContract = () => {
-  const provider = new ethers.providers.Web3Provider(ethereum);
+  const provider = new ethers.BrowserProvider(window.ethereum);
   const signer = provider.getSigner();
   const transactionsContract = new ethers.Contract(
     contractAddress,
@@ -128,7 +128,7 @@ export const TransactionsProvider = ({ children }) => {
       if (ethereum) {
         const { addressTo, amount, keyword, message } = formData;
         const transactionsContract = createEthereumContract();
-        const parsedAmount = ethers.utils.parseEther(amount);
+        const parsedAmount = ethers.parseEther(amount);
 
         await ethereum.request({
           method: "eth_sendTransaction",
